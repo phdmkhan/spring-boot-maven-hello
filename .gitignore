@@ -1,0 +1,14 @@
+# Build and Tool folders
+/target/
+.gradle
+/build/
+
+# IDE files
+.idea/
+*.iml
+*.iws
+*.ipr
+.classpath
+.project
+.settings/
+bin/
