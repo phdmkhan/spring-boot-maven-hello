@@ -14,20 +14,16 @@
     <groupId>com.example</groupId>
     <artifactId>hello</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging> <!-- 외장 Tomcat 배포용 war 설정 -->
-
-    <properties>
+    <packaging>war</packaging> <properties>
         <java.version>17</java.version>
     </properties>
 
     <dependencies>
-        <!-- Web MVC 라이브러리 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 외장 톰캣 배포 시 내장 톰캣이 충돌나지 않게 런타임 제외 설정 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -42,14 +38,28 @@
     </dependencies>
 
     <build>
-        <!-- 최종 빌드 결과물 war 파일의 이름을 'hello'로 고정시킵니다. -->
-        <!-- 최종 배포 시 http://localhost:8080/hello/ 로 접속 가능 -->
         <finalName>hello</finalName> 
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-        </plugins>
+
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <url>http://localhost:8088/manager/text</url>
+                    
+                    <path>/hello</path>
+                    
+                    <username>admin</username> 
+                    <password>admin</password>
+                    
+                    <update>true</update> 
+                </configuration>
+            </plugin>
+            </plugins>
     </build>
 </project>
